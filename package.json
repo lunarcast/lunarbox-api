@@ -14,6 +14,7 @@
     },
     "dependencies": {},
     "scripts": {
-        "start-dev": "node -r ./register.js src/index.ts"
+        "start-dev": "node -r ./register.js src/index.ts",
+        "dev": "nodemon"
     }
 }
