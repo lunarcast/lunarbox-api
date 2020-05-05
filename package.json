@@ -1,0 +1,13 @@
+{
+    "name": "server",
+    "main": "dist/index.js",
+    "repository": "git@github.com/BlueGhostGH/mapgame-server.git",
+    "author": "BlueGhostGH <engisoftleaderoff@gmail.com>",
+    "license": "MIT",
+    "engines": {
+        "node": ">=12.0.0"
+    },
+    "devDependencies": {},
+    "dependencies": {},
+    "scripts": {}
+}
