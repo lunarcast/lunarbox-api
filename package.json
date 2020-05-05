@@ -25,6 +25,9 @@
     },
     "dependencies": {},
     "scripts": {
+        "lint": "eslint **/*.ts",
+        "format": "prettier --write \"**/*.+(js|json|ts)\"",
+        "check": "yarn format && yarn lint",
         "start-dev": "node -r ./register.js src/index.ts",
         "dev": "nodemon"
     }
