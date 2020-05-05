@@ -12,5 +12,7 @@
         "typescript": "^3.8.3"
     },
     "dependencies": {},
-    "scripts": {}
+    "scripts": {
+        "start-dev": "node -r ./register.js src/index.ts"
+    }
 }
