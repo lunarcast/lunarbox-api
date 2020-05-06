@@ -37,7 +37,11 @@ router.post(
 
         session.user = user.id
         ctx.status = 200
-        ctx.body = { status: 200, message: "Successfully log in" }
+        ctx.body = {
+            status: 200,
+            message: "Successfully log in",
+            user: { username: user.username }
+        }
 
         await next()
     }
