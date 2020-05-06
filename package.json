@@ -1,7 +1,7 @@
 {
-    "name": "server",
+    "name": "lunarbox-api",
     "main": "dist/index.js",
-    "repository": "git@github.com/BlueGhostGH/mapgame-server.git",
+    "repository": "git@github.com/BlueGhostGH/lunarbox-api.git",
     "author": "BlueGhostGH <engisoftleaderoff@gmail.com>",
     "license": "MIT",
     "engines": {
