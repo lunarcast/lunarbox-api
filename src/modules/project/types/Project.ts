@@ -6,5 +6,5 @@ export interface Project {
     example: boolean
     name: string
     description: string
-    project: object
+    project: object & { nodeCount: number; functionCount: number }
 }
