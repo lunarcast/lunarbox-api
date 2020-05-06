@@ -10,6 +10,6 @@
         "strictNullChecks": true,
         "moduleResolution": "Node"
     },
-    "include": ["src"],
+    "include": ["src", "db"],
     "exclude": ["node_modules"]
 }
