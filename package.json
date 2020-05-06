@@ -46,6 +46,8 @@
         "lint": "eslint **/*.ts",
         "format": "prettier --write \"**/*.+(js|json|ts)\"",
         "check": "yarn format && yarn lint",
+        "build": "tsc",
+        "start": "node ./dist/src/index.js",
         "start-dev": "node -r ./register.js src/index.ts",
         "dev": "nodemon"
     }
