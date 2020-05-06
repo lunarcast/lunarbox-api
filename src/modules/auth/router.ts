@@ -40,7 +40,7 @@ router.post(
         ctx.body = {
             status: 200,
             message: "Successfully log in",
-            user: { username: user.username }
+            user: { username: user.username, isAdmin: user.admin }
         }
 
         await next()
