@@ -26,10 +26,10 @@ router.get("/", requireAuthenticated(), async (ctx, next) => {
         throw new HttpError(404, "There seems to be no user with that id.")
     }
 
-    const { email, username } = user
+    const { email, username, admin } = user
 
     ctx.status = 200
-    ctx.body = { email, username }
+    ctx.body = { email, username, isAdmin: admin }
 
     await next()
 })
