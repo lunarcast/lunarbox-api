@@ -29,7 +29,7 @@ router.get("/", requireAuthenticated(), async (ctx, next) => {
     const { email, username, admin } = user
 
     ctx.status = 200
-    ctx.body = { email, username, isAdmin: admin }
+    ctx.body = { user: { email, username, isAdmin: admin } }
 
     await next()
 })
