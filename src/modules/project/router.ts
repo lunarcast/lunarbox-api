@@ -17,6 +17,7 @@ import { projectBody } from "./schema/projectBody"
 import { exampleBody } from "./schema/toggleExampleBody"
 
 import { requireAuthenticated } from "../auth/middleware/requireAuthenticated"
+import { requireAdmin } from "../auth/middleware/requireAdmin"
 
 const router = new Router({ prefix: "/projects" })
 
@@ -79,6 +80,7 @@ router.delete("/:id", requireAuthenticated(), async (ctx, next) => {
 router.post(
     "/example",
     requireAuthenticated(),
+    requireAdmin(),
     validateSchema(exampleBody, "body"),
     async (ctx, next) => {
         const { id } = ctx.request.body as Pick<Project, "id">
