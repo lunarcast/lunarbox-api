@@ -4,9 +4,6 @@
     "repository": "git@github.com/BlueGhostGH/lunarbox-api.git",
     "author": "BlueGhostGH <engisoftleaderoff@gmail.com>",
     "license": "MIT",
-    "engines": {
-        "node": ">=12.0.0"
-    },
     "devDependencies": {
         "@types/bcrypt": "^3.0.0",
         "@types/hapi__joi": "^17.1.0",

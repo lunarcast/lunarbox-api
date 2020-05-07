@@ -34,7 +34,7 @@ router.get("/", requireAuthenticated(), async (ctx, next) => {
 })
 
 router.get("/:id", requireAuthenticated(), async (ctx, next) => {
-    const { id: projectId } = ctx.params.id as Pick<Project, "id">
+    const { id: projectId } = ctx.params as Pick<Project, "id">
 
     const project = await getProjectById(projectId)
     if (!project) throw new HttpError(404)
@@ -53,6 +53,7 @@ router.post(
         const { name, description, project, metadata } = ctx.request
             .body as Project
         const isExample: boolean = ctx.request.body.isExample
+
 
         const userId = ctx.session!.user
         const user = await findUser("id", userId)
