@@ -47,10 +47,12 @@ router.post(
             username,
             password: hashedPassword
         })
+
         if (!user) {
             throw new HttpError(400, "That Username seems to be already taken")
         }
 
+        ctx.session!.user = user.id
         ctx.status = 201
         ctx.body = { status: 201, message: "Successfully created" }
 
