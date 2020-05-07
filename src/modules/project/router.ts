@@ -59,7 +59,7 @@ router.post(
 
         const example = user?.admin ? isExample : false
 
-        await createProject({
+        const createdProject = await createProject({
             name,
             description,
             project,
@@ -69,7 +69,11 @@ router.post(
         })
 
         ctx.status = 201
-        ctx.body = { status: 201, message: "Successfully created" }
+        ctx.body = {
+            status: 201,
+            message: "Successfully created",
+            project: { id: createdProject.id }
+        }
 
         await next()
     }
