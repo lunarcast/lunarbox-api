@@ -5,6 +5,7 @@ export interface Project {
     owner: User["id"]
     example: boolean
     name: string
-    description: string
-    project: object & { nodeCount: number; functionCount: number }
+    description?: string
+    project: object
+    metadata: object
 }
