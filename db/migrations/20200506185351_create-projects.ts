@@ -8,6 +8,7 @@ export const up = (knex: Knex) =>
         table.text("name")
         table.text("description")
         table.json("project")
+        table.json("metadata")
         table.foreign("owner").references("id").inTable("users")
     })
 
