@@ -4,27 +4,13 @@ import { User } from "../../user/types/User"
 import { Project } from "../types/Project"
 
 export const getProjects = async (id: User["id"]) => {
-    const exampleProjects = (
-        await db<Project>("projects")
-            .select(["id", "name", "project"])
-            .where({ example: true })
-    ).map(e => {
-        const { project: proj } = e
-        const { nodeCount, functionCount } = proj
+    const exampleProjects = await db<Project>("projects")
+        .select(["id", "name", "project", "metada"])
+        .where({ example: true })
 
-        return { ...e, nodeCount, functionCount }
-    })
-
-    const userProjects = (
-        await db<Project>("projects")
-            .select(["id", "name", "project"])
-            .where({ owner: id })
-    ).map(e => {
-        const { project: proj } = e
-        const { nodeCount, functionCount } = proj
-
-        return { ...e, nodeCount, functionCount }
-    })
+    const userProjects = await db<Project>("projects")
+        .select(["id", "name", "project", "metadata"])
+        .where({ owner: id })
 
     return { exampleProjects, userProjects }
 }
