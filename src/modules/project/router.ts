@@ -18,6 +18,7 @@ import { exampleBody } from "./schema/toggleExampleBody"
 
 import { requireAuthenticated } from "../auth/middleware/requireAuthenticated"
 import { requireAdmin } from "../auth/middleware/requireAdmin"
+import { findUser } from "../user/actions/findUser"
 
 const router = new Router({ prefix: "/projects" })
 
@@ -51,14 +52,20 @@ router.post(
     async (ctx, next) => {
         const { name, description, project, metadata } = ctx.request
             .body as Project
+        const isExample: boolean = ctx.request.body.isExample
+
         const userId = ctx.session!.user
+        const user = await findUser("id", userId)
+
+        const example = user?.admin ? isExample : false
 
         await createProject({
             name,
             description,
             project,
             owner: userId,
-            metadata
+            metadata,
+            example
         })
 
         ctx.status = 201
