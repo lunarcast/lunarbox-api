@@ -49,14 +49,16 @@ router.post(
     requireAuthenticated(),
     validateSchema(projectBody, "body"),
     async (ctx, next) => {
-        const { name, description, project } = ctx.request.body as Project
+        const { name, description, project, metadata } = ctx.request
+            .body as Project
         const userId = ctx.session!.user
 
         await createProject({
             name,
             description,
             project,
-            owner: userId
+            owner: userId,
+            metadata
         })
 
         ctx.status = 201
