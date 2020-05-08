@@ -36,9 +36,13 @@ router.get("/", requireAuthenticated(), async (ctx, next) => {
 
 router.get("/:id", requireAuthenticated(), async (ctx, next) => {
     const { id: projectId } = ctx.params.id as Pick<Project, "id">
+    const userId = ctx.session!.user
 
     const project = await getProjectById(projectId)
     if (!project) throw new HttpError(404)
+    if (!project.owner !== userId) {
+        throw new HttpError(401, "It seems like this is not your project")
+    }
 
     ctx.status = 200
     ctx.body = project
