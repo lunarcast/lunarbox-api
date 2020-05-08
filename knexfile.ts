@@ -19,7 +19,7 @@ const options = {
     pool: { min: 2, max: 10 }
 }
 
-const configs: Record<string, Config<{}>> = {
+const configs: Record<string, Config<{}> & { ssl?: boolean }> = {
     development: options,
 
     test: {
@@ -29,7 +29,8 @@ const configs: Record<string, Config<{}>> = {
 
     production: {
         ...options,
-        connection: `${process.env.DATABASE_URL}?ssl=true`
+        connection: process.env.DATABASE_URL,
+        ssl: true
     }
 }
 
