@@ -58,7 +58,7 @@ router.get("/clone/:id", requireAuthenticated(), async (ctx, next) => {
     if (!project) {
         throw new HttpError(404, "Seems like there's no project with that id")
     }
-    const { isExample, ...proj } = project
+    const { isExample, id, ...proj } = project
 
     const createdProject = await createProject({
         ...proj,
