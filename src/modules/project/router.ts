@@ -7,6 +7,7 @@ import { Project } from "./types/Project"
 import { getProjects } from "./actions/getProjects"
 import { getProjectById } from "./actions/getProjectById"
 import { createProject } from "./actions/createProject"
+import { saveProject } from "./actions/saveProject"
 import { toggleExample } from "./actions/toggleExample"
 import { deleteProject } from "./actions/deleteProject"
 
@@ -73,6 +74,38 @@ router.post(
             status: 201,
             message: "Successfully created",
             project: { id: createdProject.id }
+        }
+
+        await next()
+    }
+)
+
+router.put(
+    "/:id",
+    requireAuthenticated(),
+    validateSchema(projectBody, "body"),
+    async (ctx, next) => {
+        const { id } = ctx.params as Pick<Project, "id">
+        const { name, description, project, metadata } = ctx.request
+            .body as Project
+
+        const userId = ctx.session!.user
+
+        const isExample: boolean = ctx.request.body.isExample
+
+        await saveProject(id, {
+            owner: userId,
+            name,
+            description,
+            example: isExample,
+            project,
+            metadata
+        })
+
+        ctx.status = 200
+        ctx.body = {
+            status: 200,
+            message: "Successfully updated"
         }
 
         await next()
