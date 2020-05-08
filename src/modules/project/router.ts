@@ -60,10 +60,10 @@ router.get("/clone/:id", requireAuthenticated(), async (ctx, next) => {
     }
 
     const createdProject = await createProject({
+        ...project,
         owner: userId,
         example: false,
-        name: `${project.name} - clone`,
-        ...project
+        name: `${project.name} - clone`
     })
 
     ctx.status = 201
