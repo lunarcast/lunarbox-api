@@ -1,6 +1,10 @@
 import type { Config } from "knex"
 import { config } from "dotenv"
 
+import pg from "pg"
+
+pg.defaults.ssl = true
+
 config()
 
 const options = {
@@ -19,7 +23,7 @@ const options = {
     pool: { min: 2, max: 10 }
 }
 
-const configs: Record<string, Config<{}> & { ssl?: boolean }> = {
+const configs: Record<string, Config<{}>> = {
     development: options,
 
     test: {
@@ -29,8 +33,7 @@ const configs: Record<string, Config<{}> & { ssl?: boolean }> = {
 
     production: {
         ...options,
-        connection: process.env.DATABASE_URL,
-        ssl: true
+        connection: `${process.env.DATABASE_URL}?ssl=true`
     }
 }
 
