@@ -144,6 +144,15 @@ router.put(
 
 router.delete("/:id", requireAuthenticated(), async (ctx, next) => {
     const projectId = ctx.params.id as Project["id"]
+    const userId = ctx.session!.user
+
+    const project = await getProjectById(projectId)
+    if (project?.owner !== userId) {
+        throw new HttpError(
+            401,
+            "You don't seem to be the owner of that project"
+        )
+    }
 
     await deleteProject(projectId)
 
