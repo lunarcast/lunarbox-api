@@ -51,7 +51,7 @@ router.get("/:id", requireAuthenticated(), async (ctx, next) => {
 })
 
 router.get("/clone/:id", requireAuthenticated(), async (ctx, next) => {
-    const { id: projectId } = ctx.params.id as Pick<Project, "id">
+    const { id: projectId } = ctx.params as Pick<Project, "id">
     const userId = ctx.session!.user
 
     const project = await getProjectById(projectId)
