@@ -40,7 +40,7 @@ router.get("/:id", requireAuthenticated(), async (ctx, next) => {
 
     const project = await getProjectById(projectId)
     if (!project) throw new HttpError(404)
-    if (!project.owner !== userId) {
+    if (project.owner !== userId) {
         throw new HttpError(401, "It seems like this is not your project")
     }
 
