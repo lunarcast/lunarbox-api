@@ -29,7 +29,7 @@ const configs: Record<string, Config<{}>> = {
 
     production: {
         ...options,
-        connection: `${process.env.DATABASE_URL}?ssl=true`
+        connection: process.env.DATABASE_URL
     }
 }
 
