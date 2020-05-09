@@ -136,7 +136,7 @@ The response will be made up of two arrays of elements of the type `Project`
     "name": "Average",
     "isExample": true,
     "project": {
-        // This has yet to be documented
+        "comment": "This has yet to be documented"
     },
     "metadata": {
         "functionCount": 2,
