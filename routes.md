@@ -187,8 +187,6 @@ Returns a specific project, of type `Project`, including its graph/saveData in t
 
 #### JSON Params of Response
 
-The Project type is as follows:
-
 | Field |  Type  | Note                            |
 | :---: | :----: | ------------------------------- |
 |  id   | number | ID of the newly created project |
