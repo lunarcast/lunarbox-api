@@ -163,24 +163,4 @@ router.delete("/:id", requireAuthenticated(), async (ctx, next) => {
     await next()
 })
 
-router.post(
-    "/example",
-    requireAuthenticated(),
-    requireAdmin(),
-    validateSchema(exampleBody, "body"),
-    async (ctx, next) => {
-        const { id } = ctx.request.body as Pick<Project, "id">
-
-        await toggleExample(id)
-
-        ctx.status = 200
-        ctx.body = {
-            status: 200,
-            message: "Successfully toggled project's example status"
-        }
-
-        await next()
-    }
-)
-
 export default router.routes()
