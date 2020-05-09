@@ -68,8 +68,6 @@ Logs-out the currently logged-in user.
 
 ### Get the current user's projects
 
-`GET /api/projects`
-
 ```json
 {
     "userProjects": [
@@ -120,6 +118,8 @@ The Metadata type is as follows:
 | functionCount | number |      |
 |   nodeCount   | number |      |
 
+`GET /api/projects`
+
 Returns the current logged-in user's projects plus the example projects, in the arrays named `userProjects` and, respectively, `exampleProjects`.
 
 The response will be made up of two arrays of elements of the type `Project`
@@ -167,7 +167,7 @@ The Metadata type is as follows:
 
 The `id` parameter must be of type `number`!
 
-`GET /api/project/:id`
+`GET /api/projects/:id`
 
 Returns a specific project, of type `Project`, including its graph/saveData in the `project` field.
 
@@ -193,6 +193,6 @@ Returns a specific project, of type `Project`, including its graph/saveData in t
 
 The `id` parameter must be of type `number`!
 
-`GET /api/project/:id`
+`GET /api/projects/:id`
 
 Clones an example project, appending `- clone` to its name, and setting the owner to the id of the requesting client.
