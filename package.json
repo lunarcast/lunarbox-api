@@ -58,6 +58,7 @@
         "build": "tsc && knex --cwd ./dist migrate:latest",
         "start": "node ./dist/src/index.js",
         "start-dev": "node -r ./register.js src/index.ts",
-        "dev": "nodemon"
+        "dev": "nodemon",
+        "fresh-testdb": "dropdb --if-exists test-todoapi && createdb test-todoapi"
     }
 }
