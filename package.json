@@ -59,6 +59,8 @@
         "start": "node ./dist/src/index.js",
         "start-dev": "node -r ./register.js src/index.ts",
         "dev": "nodemon",
-        "fresh-testdb": "dropdb --if-exists test-lunarbox && createdb test-lunarbox"
+        "fresh-testdb": "dropdb --if-exists test-lunarbox && createdb test-lunarbox",
+        "test": "npm run fresh-testdb && cross-env NODE_ENV=test mocha -r ./register.js 'src/**/*.test.ts' --exit",
+        "test-coverage": "nyc npm test"
     }
 }
