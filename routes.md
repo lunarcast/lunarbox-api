@@ -35,3 +35,31 @@ Creates an user, and immediately logs in the requesting client.
 `DELETE /api/users/`
 
 Deletes the currently logged-in account.
+
+## Auth
+
+### Log-in
+
+`POST /api/auth/login/`
+
+```json
+{
+    "email": "ilovefp@lunarbox.com",
+    "password": "ThisIsAStrongPassword39"
+}
+```
+
+#### JSON Params
+
+|  Field   |  Type  | Note                         |
+| :------: | :----: | ---------------------------- |
+|  email   | string | Must be a valid email adress |
+| password | string |                              |
+
+Logs-in the requesting client to the user with the specified e-mail.
+
+### Log-out
+
+`GET /api/auth/logout/`
+
+Logs-out the currently logged-in user.
