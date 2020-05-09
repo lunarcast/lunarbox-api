@@ -21,10 +21,7 @@ const router = new Router({ prefix: "/users" })
 router.get("/", requireAuthenticated(), async (ctx, next) => {
     const userId = ctx.session!.user
 
-    const user = await findUser("id", userId)
-    if (!user) {
-        throw new HttpError(404, "There seems to be no user with that id.")
-    }
+    const user = (await findUser("id", userId))!
 
     const { email, username, admin } = user
 
@@ -61,9 +58,10 @@ router.post(
 )
 
 router.delete("/", requireAuthenticated(), async (ctx, next) => {
-    const userId = ctx.session!.user as number
+    const userId = ctx.session?.user as number
 
     await deleteUser(userId)
+    ctx.session = null
 
     ctx.status = 200
     ctx.body = { status: 200, message: "Successfully deleted user account" }
