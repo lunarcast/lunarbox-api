@@ -6,7 +6,7 @@
 
 `GET /api/users/`
 
-Returns the current logged-in user's: `email`, `username` and admin(`isAdmin`) status, all within an `user` object.
+Returns the current logged-in user's: `email`, `username`, and admin(`isAdmin`) status, all within an `user` object.
 
 ### Create an user account
 
@@ -26,7 +26,7 @@ Returns the current logged-in user's: `email`, `username` and admin(`isAdmin`) s
 | :------: | :----: | ----------------------------------------------------------------------------------- |
 |  email   | string | Must be a valid email adress                                                        |
 | username | string | Must be at least two characters long and at most 32 characters long; must be unique |
-| password | string | Must contain at least one uppercase letter, one lowercase letter and one digit      |
+| password | string | Must contain at least one uppercase letter, one lowercase letter and one digiit     |
 
 Creates an user, and immediately logs in the requesting client.
 
@@ -120,7 +120,7 @@ The Metadata type is as follows:
 | functionCount | number |      |
 |   nodeCount   | number |      |
 
-Returns the current logged-in user's projects plus the example projects, in the arrays named `userProjects` and `exampleProjects` respectively.
+Returns the current logged-in user's projects and the example projects in the arrays named `userProjects` and `exampleProjects`, respectively.
 
 The response will be made up of two arrays of elements of the type `Project`
 
@@ -170,7 +170,7 @@ The Metadata type is as follows:
 
 The `id` parameter must be of type `number`!
 
-Returns a specific project, of type `Project`, including its graph/saveData in the `project` field.
+Returns a specific project of type `Project`, including its graph/saveData in the `project` field.
 
 ### Clone a project
 
@@ -196,7 +196,7 @@ Returns a specific project, of type `Project`, including its graph/saveData in t
 
 The `id` parameter must be of type `number`!
 
-Clones an example project, appending `- clone` to its name, and setting the owner to the id of the requesting client.
+Clones an example project, appends `- clone` to its name, and sets the owner to the id of the requesting client.
 
 ### Create a project
 
