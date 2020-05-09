@@ -68,6 +68,8 @@ Logs-out the currently logged-in user.
 
 ### Get the current user's projects
 
+`GET /api/projects`
+
 ```json
 {
     "userProjects": [
@@ -118,8 +120,6 @@ The Metadata type is as follows:
 | functionCount | number |      |
 |   nodeCount   | number |      |
 
-`GET /api/projects`
-
 Returns the current logged-in user's projects plus the example projects, in the arrays named `userProjects` and, respectively, `exampleProjects`.
 
 The response will be made up of two arrays of elements of the type `Project`
@@ -128,6 +128,8 @@ The response will be made up of two arrays of elements of the type `Project`
 
 > Note: the user must be the owner of the project
 > Note: The ProjectData type is yet to be documented.
+
+`GET /api/projects/:id`
 
 ```json
 {
@@ -167,13 +169,13 @@ The Metadata type is as follows:
 
 The `id` parameter must be of type `number`!
 
-`GET /api/projects/:id`
-
 Returns a specific project, of type `Project`, including its graph/saveData in the `project` field.
 
 ### Clone a project
 
 > Note: the project must be an example
+
+`GET /api/projects/:id`
 
 ```json
 {
@@ -193,6 +195,44 @@ Returns a specific project, of type `Project`, including its graph/saveData in t
 
 The `id` parameter must be of type `number`!
 
-`GET /api/projects/:id`
-
 Clones an example project, appending `- clone` to its name, and setting the owner to the id of the requesting client.
+
+### Create a project
+
+`POST /api/projects/`
+
+> Note: to create a project with `isExample` true, one must be an admin
+> Note: The ProjectData type is yet to be documented.
+
+```json
+{
+    "name": "My first project",
+    "isExample": false,
+    "project": {
+        "comment": "This has yet to be documented"
+    },
+    "metadata": {
+        "functionCount": 1,
+        "nodeCount": 3
+    }
+}
+```
+
+#### JSON Params of Request
+
+|    Field    |    Type     | Note                                            |
+| :---------: | :---------: | ----------------------------------------------- |
+|    name     |   string    | Must be a valid email adress                    |
+| description |   string?   | This has not yet been implemented in the client |
+|  isExample  |   boolean   |                                                 |
+|   project   | ProjectData |                                                 |
+|  metadata   |  Metadata   |                                                 |
+
+The Metadata type is as follows:
+
+|     Field     |  Type  | Note |
+| :-----------: | :----: | ---- |
+| functionCount | number |      |
+|   nodeCount   | number |      |
+
+Creates a new project.
