@@ -20,7 +20,7 @@ Returns the current logged-in user's: `email`, `username` and admin(`isAdmin`) s
 }
 ```
 
-#### JSON Params
+#### JSON Params of Request
 
 |  Field   |  Type  | Note                                                                                |
 | :------: | :----: | ----------------------------------------------------------------------------------- |
@@ -49,7 +49,7 @@ Deletes the currently logged-in account.
 }
 ```
 
-#### JSON Params
+#### JSON Params of Request
 
 |  Field   |  Type  | Note                         |
 | :------: | :----: | ---------------------------- |
@@ -63,3 +63,108 @@ Logs-in the requesting client to the user with the specified e-mail.
 `GET /api/auth/logout/`
 
 Logs-out the currently logged-in user.
+
+## Projects
+
+### Get the current user's projects
+
+`GET /api/projects`
+
+```json
+{
+    "userProjects": [
+        {
+            "id": 14,
+            "name": "My first project",
+            "metadata": {
+                "functionCount": 1,
+                "nodeCount": 3
+            }
+        },
+        {
+            "id": 17,
+            "name": "Yay for FP",
+            "metadata": {
+                "functionCount": 3,
+                "nodeCount": 12
+            }
+        }
+    ],
+    "exampleProjects": [
+        {
+            "id": 5,
+            "name": "Average",
+            "metadata": {
+                "functionCount": 2,
+                "nodeCount": 10
+            }
+        }
+    ]
+}
+```
+
+#### JSON Params of Response
+
+The Project type is as follows:
+
+|  Field   |   Type   | Note |
+| :------: | :------: | ---- |
+|    id    |  number  |      |
+|   name   |  string  |      |
+| metadata | Metadata |      |
+
+The Metadata type is as follows:
+
+|     Field     |  Type  | Note |
+| :-----------: | :----: | ---- |
+| functionCount | number |      |
+|   nodeCount   | number |      |
+
+Returns the current logged-in user's projects plus the example projects, in the arrays named `userProjects` and, respectively, `exampleProjects`.
+
+The response will be made up of two arrays of elements of the type `Project`
+
+### Get a specific project
+
+> Note: the user must be the owner of the project
+> Note: The ProjectData type is yet to be documented.
+
+```json
+{
+    "id": 5,
+    "owner": 1,
+    "name": "Average",
+    "isExample": true,
+    "project": {
+        // This has yet to be documented
+    },
+    "metadata": {
+        "functionCount": 2,
+        "nodeCount": 10
+    }
+}
+```
+
+#### JSON Params of Response
+
+The Project type is as follows:
+
+|   Field   |    Type     | Note                           |
+| :-------: | :---------: | ------------------------------ |
+|    id     |   number    |                                |
+|   owner   |   number    | ID of the owner of the project |
+|   name    |   string    |                                |
+| isExample |   boolean   |                                |
+|  project  | ProjectData |                                |
+| metadata  |  Metadata   |                                |
+
+The Metadata type is as follows:
+
+|     Field     |  Type  | Note |
+| :-----------: | :----: | ---- |
+| functionCount | number |      |
+|   nodeCount   | number |      |
+
+`GET /api/project/:id`
+
+Returns a specific project, of type `Project`, including its graph/saveData in the `project` field.
