@@ -21,10 +21,7 @@ const router = new Router({ prefix: "/users" })
 router.get("/", requireAuthenticated(), async (ctx, next) => {
     const userId = ctx.session!.user
 
-    const user = await findUser("id", userId)
-    if (!user) {
-        throw new HttpError(404, "There seems to be no user with that id.")
-    }
+    const user = (await findUser("id", userId))!
 
     const { email, username, admin } = user
 
