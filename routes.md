@@ -165,6 +165,8 @@ The Metadata type is as follows:
 | functionCount | number |      |
 |   nodeCount   | number |      |
 
+The `id` parameter must be of type `number`!
+
 `GET /api/project/:id`
 
 Returns a specific project, of type `Project`, including its graph/saveData in the `project` field.
