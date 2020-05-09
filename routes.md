@@ -5,6 +5,7 @@
 ### Get current user
 
 `GET /api/users/`
+
 Returns the current logged-in user's: `email`, `username` and admin(`isAdmin`) status, all within an `user` object.
 
 ### Create an user account
@@ -32,4 +33,5 @@ Creates an user, and immediately logs in the requesting client.
 ### Delete an user account
 
 `DELETE /api/users/`
+
 Deletes the currently logged-in account.
