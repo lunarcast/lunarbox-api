@@ -170,3 +170,31 @@ The `id` parameter must be of type `number`!
 `GET /api/project/:id`
 
 Returns a specific project, of type `Project`, including its graph/saveData in the `project` field.
+
+### Clone a project
+
+> Note: the project must be an example
+
+```json
+{
+    "status": 201,
+    "message": "Successfully cloned",
+    "project": {
+        "id": 33
+    }
+}
+```
+
+#### JSON Params of Response
+
+The Project type is as follows:
+
+| Field |  Type  | Note                            |
+| :---: | :----: | ------------------------------- |
+|  id   | number | ID of the newly created project |
+
+The `id` parameter must be of type `number`!
+
+`GET /api/project/:id`
+
+Clones an example project, appending `- clone` to its name, and setting the owner to the id of the requesting client.
