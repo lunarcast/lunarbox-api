@@ -280,4 +280,14 @@ The Metadata type is as follows:
 
 The `id` parameter must be of type `number`!
 
-Saves/updates a project.
+Saves/updates a specific project.
+
+### Delete a specific project
+
+> Note: the user must be the owner of the project
+
+`DELETE /api/projects/:id`
+
+The `id` parameter must be of type `number`!
+
+Deletes a specific project.
