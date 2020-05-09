@@ -15,5 +15,5 @@ export const seed = async (knex: Knex) => {
         })
     )
 
-    return knex("users").insert(users)
+    return knex("users").insert(hashedUsers)
 }
