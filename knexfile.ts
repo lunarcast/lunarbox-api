@@ -3,9 +3,11 @@ import { config } from "dotenv"
 
 import pg from "pg"
 
-pg.defaults.ssl = true
-
 config()
+
+if (process.env.NODE_ENV === "production") {
+    pg.defaults.ssl = true
+}
 
 const options = {
     client: process.env.DB_CLIENT,
