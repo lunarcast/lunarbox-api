@@ -21,6 +21,7 @@
         "@typescript-eslint/eslint-plugin": "^2.31.0",
         "@typescript-eslint/parser": "^2.31.0",
         "chai": "^4.2.0",
+        "crossenv": "^0.0.2-security",
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.11.0",
         "eslint-config-standard": "^14.1.1",
