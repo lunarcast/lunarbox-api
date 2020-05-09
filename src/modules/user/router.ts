@@ -61,9 +61,10 @@ router.post(
 )
 
 router.delete("/", requireAuthenticated(), async (ctx, next) => {
-    const userId = ctx.session!.user as number
+    const userId = ctx.session?.user as number
 
     await deleteUser(userId)
+    ctx.session = null
 
     ctx.status = 200
     ctx.body = { status: 200, message: "Successfully deleted user account" }
