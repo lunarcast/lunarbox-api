@@ -4,10 +4,10 @@ Acesta este API-ul pentru [Lunarbox](https://lunarbox.netlify.app/), o unealta p
 
 Proiectul a fost scis in [TypeScript](https://www.typescriptlang.org/), o extindere a limbajului arhicunoscut, JavaScript, ce isi propuna sa elimine o problema cruciala a limbajului, si anume lipsa tipurilor, deoarece prefer sa am erori minore la compile-time, decat batai de cap majore in productie. Pot spune ca avantajele folosirii TypeScript-ului sunt enorme.
 
-- Ca MVC Framework am folosit [Koa](https://koajs.com/), o biblioteca care este facuta de echipa din spatele bibliotecii express, aceasta fiind succesorul spiritual al lui Express, fiind ce echipa initiala si-a dorit de la Express.
-- Pentru pacakge managementul dependentelor de pe [npm](https://www.npmjs.com/) am folosit [yarn](https://yarnpkg.com/) - un CLI care nu numai ca are o performanta imbunatatita, dar are o gama mai larga de posibile proiect in care poate fi folosit, de la proiecte de incepatori la monorepo-uri gigantice.
-- Ca Database Engine am folosit [PostgreSQL](https://www.postgresql.org/), iar pentru query building am folosit [Knex](http://knexjs.org/).
-- Pentru hot-reloading(rerulare a programului la fiecare schimbare) am folosit [nodemon](https://nodemon.io/), iar pentru a putea folosi TypeScript direct in development am folosit [ts-node](https://www.npmjs.com/package/ts-node).
+-   Ca MVC Framework am folosit [Koa](https://koajs.com/), o biblioteca care este facuta de echipa din spatele bibliotecii express, aceasta fiind succesorul spiritual al lui Express, fiind ce echipa initiala si-a dorit de la Express.
+-   Pentru pacakge managementul dependentelor de pe [npm](https://www.npmjs.com/) am folosit [yarn](https://yarnpkg.com/) - un CLI care nu numai ca are o performanta imbunatatita, dar are o gama mai larga de posibile proiect in care poate fi folosit, de la proiecte de incepatori la monorepo-uri gigantice.
+-   Ca Database Engine am folosit [PostgreSQL](https://www.postgresql.org/), iar pentru query building am folosit [Knex](http://knexjs.org/).
+-   Pentru hot-reloading(rerulare a programului la fiecare schimbare) am folosit [nodemon](https://nodemon.io/), iar pentru a putea folosi TypeScript direct in development am folosit [ts-node](https://www.npmjs.com/package/ts-node).
 
 ## De ce Koa
 
@@ -21,7 +21,7 @@ De a lungul experientei mele cu back-end-ul, am incercat o varietate de framewor
 
 ## De ce Postgres
 
-Nu voi intra in detalii de ce am preferat un engine bazat pe SQL in loc de NoSQL, deoarece consider ca 99% din cazurile in care o baza de date este folosita, informatia stocata in aceasta este relationala. In schimb, fata de alte engine-uri bazate pe SQL, am avut de ales intre PostgreSQL si MySQL, alegand Postgres din varii motive cum ar fi: sintaxa mult mai apropiata de standard-ul SQL, este un engine complet open-source, performanta mai buna conform *unor* benchmark-uri(desi citirea poate fi mai inceata, scrierea este in general mai rapida, iar scrierea in paralel este obiectiv superioara),
+Nu voi intra in detalii de ce am preferat un engine bazat pe SQL in loc de NoSQL, deoarece consider ca 99% din cazurile in care o baza de date este folosita, informatia stocata in aceasta este relationala. In schimb, fata de alte engine-uri bazate pe SQL, am avut de ales intre PostgreSQL si MySQL, alegand Postgres din varii motive cum ar fi: sintaxa mult mai apropiata de standard-ul SQL, este un engine complet open-source, performanta mai buna conform _unor_ benchmark-uri(desi citirea poate fi mai inceata, scrierea este in general mai rapida, iar scrierea in paralel este obiectiv superioara),
 
 ## De ce knex
 
@@ -36,14 +36,14 @@ Desi TypeScript, si implicit JavaScript, este un limbaj multi-paradigm, am folos
 
 De la inceput am folosit [git](https://git-scm.com/). Deoarece in fiecare repository (front-end / back-end) a lucrat o singura persoana am folosit un sistem de branching destul de simplu:
 
-Branchul default este `develop` care contine cele mai recente surse ale aplicatii. Fiecare commit in develop este testat si construit automat folosind GitHub actions. Mereu cand vreau sa fac un release creeez un pull request in `master`. Dupa ce totul e testat si compilat se genereaza un changelog din commituri (acest lucru este posibil deoarece folosesc [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)) si un GitHub release avand ca descriere sectiunea din changelog a respectibului release. Dupa acesti pasi proiectul este publicat automat pe [Heroku](https://www.heroku.com/).
+Branchul default este `develop` care contine cele mai recente surse ale aplicatii. Mereu cand vreau sa fac un release creeez un pull request in `master`. Proiectul este publicat automat pe [Heroku](https://www.heroku.com/) la fiecare schimbare pe branch-ul `master`.
 
 ## Structura fisierelor
 
 In folderul [src](../src) se afla urmatoarele fisiere si foldere:
 
-- [index.ts](../src/index.ts) - fisierul care gestioneaza serverul ce foloseste Koa
-- [modules](../src/modules) & [common](../src/common) - Aceste foldere contin aplicatia propriu-zisa
+-   [index.ts](../src/index.ts) - fisierul care gestioneaza serverul ce foloseste Koa
+-   [modules](../src/modules) & [common](../src/common) - Aceste foldere contin aplicatia propriu-zisa
 
 ### Folderele 'modules' si 'common'
 
