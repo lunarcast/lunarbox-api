@@ -5,6 +5,7 @@
     "author": "BlueGhostGH <engisoftleaderoff@gmail.com>",
     "license": "MIT",
     "devDependencies": {
+        "@istanbuljs/nyc-config-typescript": "^1.0.1",
         "@types/bcrypt": "^3.0.0",
         "@types/chai": "^4.2.11",
         "@types/hapi__joi": "^17.1.0",
@@ -30,6 +31,7 @@
         "eslint-plugin-standard": "^4.0.1",
         "mocha": "^7.1.2",
         "nodemon": "^2.0.3",
+        "nyc": "^15.0.1",
         "prettier": "^2.0.5",
         "supertest": "^4.0.2",
         "ts-node": "^8.10.1",
