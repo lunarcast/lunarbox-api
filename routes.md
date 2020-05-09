@@ -68,7 +68,7 @@ Logs-out the currently logged-in user.
 
 ### Get the current user's projects
 
-`GET /api/projects`
+`GET /api/projects/`
 
 ```json
 {
@@ -130,7 +130,7 @@ The response will be made up of two arrays of elements of the type `Project`
 
 > Note: The ProjectData type is yet to be documented
 
-`GET /api/projects/:id`
+`GET /api/projects/:id/`
 
 ```json
 {
@@ -176,7 +176,7 @@ Returns a specific project, of type `Project`, including its graph/saveData in t
 
 > Note: the project must be an example
 
-`GET /api/projects/:id`
+`GET /api/projects/:id/`
 
 ```json
 {
@@ -241,7 +241,7 @@ Creates a new project.
 
 ### Save a project
 
-`PUT /api/projects/:id`
+`PUT /api/projects/:id/`
 
 > Note: to save a project with `isExample` true, one must be an admin
 
@@ -286,7 +286,7 @@ Saves/updates a specific project.
 
 > Note: the user must be the owner of the project
 
-`DELETE /api/projects/:id`
+`DELETE /api/projects/:id/`
 
 The `id` parameter must be of type `number`!
 
