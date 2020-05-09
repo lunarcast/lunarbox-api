@@ -127,7 +127,8 @@ The response will be made up of two arrays of elements of the type `Project`
 ### Get a specific project
 
 > Note: the user must be the owner of the project
-> Note: The ProjectData type is yet to be documented.
+
+> Note: The ProjectData type is yet to be documented
 
 `GET /api/projects/:id`
 
@@ -202,7 +203,8 @@ Clones an example project, appending `- clone` to its name, and setting the owne
 `POST /api/projects/`
 
 > Note: to create a project with `isExample` true, one must be an admin
-> Note: The ProjectData type is yet to be documented.
+
+> Note: The ProjectData type is yet to be documented
 
 ```json
 {
