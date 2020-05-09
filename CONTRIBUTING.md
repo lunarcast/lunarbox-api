@@ -6,6 +6,8 @@
 
 This guide assumes you have Node, yarn and PostgreSQL already installed.
 
+This guide also assumes you know how to create a database with Postgres!
+
 ### Installing dependencies
 
 Clone the repo. Install dependencies with:
