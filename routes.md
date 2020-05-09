@@ -224,7 +224,7 @@ Clones an example project, appending `- clone` to its name, and setting the owne
 
 |    Field    |    Type     | Note                                            |
 | :---------: | :---------: | ----------------------------------------------- |
-|    name     |   string    | Must be a valid email adress                    |
+|    name     |   string    |                                                 |
 | description |   string?   | This has not yet been implemented in the client |
 |  isExample  |   boolean   |                                                 |
 |   project   | ProjectData |                                                 |
@@ -238,3 +238,46 @@ The Metadata type is as follows:
 |   nodeCount   | number |      |
 
 Creates a new project.
+
+### Save a project
+
+`PUT /api/projects/:id`
+
+> Note: to save a project with `isExample` true, one must be an admin
+
+> Note: The ProjectData type is yet to be documented
+
+```json
+{
+    "name": "My first project",
+    "isExample": false,
+    "project": {
+        "comment": "This has yet to be documented"
+    },
+    "metadata": {
+        "functionCount": 1,
+        "nodeCount": 3
+    }
+}
+```
+
+#### JSON Params of Request
+
+|    Field    |    Type     | Note                                            |
+| :---------: | :---------: | ----------------------------------------------- |
+|    name     |   string    |                                                 |
+| description |   string?   | This has not yet been implemented in the client |
+|  isExample  |   boolean   |                                                 |
+|   project   | ProjectData |                                                 |
+|  metadata   |  Metadata   |                                                 |
+
+The Metadata type is as follows:
+
+|     Field     |  Type  | Note |
+| :-----------: | :----: | ---- |
+| functionCount | number |      |
+|   nodeCount   | number |      |
+
+The `id` parameter must be of type `number`!
+
+Saves/updates a project.
