@@ -59,6 +59,6 @@
         "start": "node ./dist/src/index.js",
         "start-dev": "node -r ./register.js src/index.ts",
         "dev": "nodemon",
-        "fresh-testdb": "dropdb --if-exists test-todoapi && createdb test-todoapi"
+        "fresh-testdb": "dropdb --if-exists test-lunarbox && createdb test-lunarbox"
     }
 }
