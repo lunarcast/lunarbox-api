@@ -4,7 +4,7 @@ export interface Project {
     id: number
     owner: User["id"]
     example: boolean
-    public: boolean
+    visible: boolean
     name: string
     description?: string
     project: object

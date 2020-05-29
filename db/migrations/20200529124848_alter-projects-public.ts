@@ -2,10 +2,10 @@ import Knex from "knex"
 
 export const up = (knex: Knex) =>
     knex.schema.table("projects", table => {
-        table.boolean("public").defaultTo(false)
+        table.boolean("visible").defaultTo(false)
     })
 
 export const down = (knex: Knex) =>
     knex.schema.table("projects", table => {
-        table.dropColumn("public")
+        table.dropColumn("visible")
     })
