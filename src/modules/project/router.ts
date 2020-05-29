@@ -8,14 +8,11 @@ import { getProjects } from "./actions/getProjects"
 import { getProjectById } from "./actions/getProjectById"
 import { createProject } from "./actions/createProject"
 import { saveProject } from "./actions/saveProject"
-import { toggleExample } from "./actions/toggleExample"
 import { deleteProject } from "./actions/deleteProject"
 
 import { validateSchema } from "../schema/middleware/validateSchema"
 
 import { projectBody } from "./schema/projectBody"
-
-import { exampleBody } from "./schema/toggleExampleBody"
 
 import { requireAuthenticated } from "../auth/middleware/requireAuthenticated"
 import { requireAdmin } from "../auth/middleware/requireAdmin"
@@ -82,7 +79,7 @@ router.post(
     requireAuthenticated(),
     validateSchema(projectBody, "body"),
     async (ctx, next) => {
-        const { name, description, project, metadata } = ctx.request
+        const { name, description, project, metadata, visible } = ctx.request
             .body as Project
         const isExample: boolean = ctx.request.body.isExample
 
@@ -97,7 +94,8 @@ router.post(
             project,
             owner: userId,
             metadata,
-            example
+            example,
+            visible
         })
 
         ctx.status = 201
@@ -117,7 +115,7 @@ router.put(
     validateSchema(projectBody, "body"),
     async (ctx, next) => {
         const { id } = ctx.params as Pick<Project, "id">
-        const { name, description, project, metadata } = ctx.request
+        const { name, description, project, metadata, visible } = ctx.request
             .body as Project
 
         const userId = ctx.session!.user
@@ -129,6 +127,7 @@ router.put(
             name,
             description,
             example: isExample,
+            visible,
             project,
             metadata
         })
