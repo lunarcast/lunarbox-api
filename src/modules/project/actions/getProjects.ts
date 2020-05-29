@@ -16,5 +16,5 @@ export const getProjects = async (id: User["id"]) => {
         .select(["id", "name", "metadata"])
         .where({ owner: id })
 
-    return { exampleProjects, userProjects }
+    return { exampleProjects, visibleProjects, userProjects }
 }
