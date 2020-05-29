@@ -55,13 +55,21 @@ router.get("/clone/:id", requireAuthenticated(), async (ctx, next) => {
     if (!project) {
         throw new HttpError(404, "Seems like there's no project with that id")
     }
-    const { isExample, id, ...proj } = project
+    const { isExample, visible, id, ...proj } = project
+
+    if (!visible) {
+        throw new HttpError(
+            401,
+            "Seems like the project you're trying to clone is not public"
+        )
+    }
 
     const createdProject = await createProject({
         ...proj,
         owner: userId,
         example: false,
-        name: `${project.name} - clone`
+        name: `${project.name} - clone`,
+        visible: false
     })
 
     ctx.status = 201
