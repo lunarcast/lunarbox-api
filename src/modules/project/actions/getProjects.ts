@@ -8,6 +8,10 @@ export const getProjects = async (id: User["id"]) => {
         .select(["id", "name", "metadata"])
         .where({ example: true })
 
+    const visibleProjects = await db<Project>("projects")
+        .select(["id", "name", "metadata"])
+        .where({ visible: true })
+
     const userProjects = await db<Project>("projects")
         .select(["id", "name", "metadata"])
         .where({ owner: id })
