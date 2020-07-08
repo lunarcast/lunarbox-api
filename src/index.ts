@@ -12,6 +12,7 @@ import { errorHandler } from "./modules/error/middleware/errorHandler"
 import { useSession } from "./modules/session/helpers/useSession"
 
 import apiRoutes from "./modules/apiRouter"
+import previewRoute from "./modules/preview/router"
 
 const app = new Koa()
 
@@ -29,7 +30,7 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(errorHandler())
 
-router.use(apiRoutes)
+router.use(apiRoutes).use(previewRoute)
 
 app.use(router.routes()).use(router.allowedMethods())
 
