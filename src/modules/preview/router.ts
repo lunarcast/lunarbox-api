@@ -1,3 +1,5 @@
+import isbot from "isbot"
+
 import Router from "../Router"
 
 import { HttpError } from "../error/classes/HttpError"
@@ -21,6 +23,11 @@ router.get("/:id", async (ctx, next) => {
 
     const author = (await findUser("id", project.owner))!
 
+    if (!isbot(ctx.get("User-Agent"))) {
+        ctx.redirect(`${process.env.CORS_ORIGIN!}/clone/${project.id}`)
+        return await next()
+    }
+
     ctx.status = 200
     ctx.type = "text/html; charset=utf-8"
     ctx.body = `<meta property="og:title" content="${project.name}" />
@@ -36,7 +43,7 @@ router.get("/:id", async (ctx, next) => {
 
         <meta property="og:image" content="${imageLink}" />`
 
-    await next()
+    return await next()
 })
 
 export default router.routes()
