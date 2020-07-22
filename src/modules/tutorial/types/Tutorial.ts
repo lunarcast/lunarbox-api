@@ -12,4 +12,14 @@ export interface Tutorial {
     hiddenElements: object
 }
 
+export interface TutorialRaw {
+    id: string
+    name: string
+    base: string
+    requires: string
+    solution: Project["id"]
+    steps: object
+    hidden: object
+}
+
 type TutorialWithMetadata = Tutorial & { completed: boolean }
