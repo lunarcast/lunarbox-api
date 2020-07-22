@@ -1,13 +1,19 @@
 import { db } from "../../../../db/knex"
 
-import { Tutorial } from "../types/Tutorial"
+import { Tutorial, TutorialRaw } from "../types/Tutorial"
 
 export const getTutorialById = async (id: Tutorial["id"]) => {
-    const tutorials = await db<Tutorial>("tutorials")
+    const tutorial = await db<TutorialRaw>("tutorials")
         .select()
         .first()
         .where({ id })
-    if (!tutorials) return null
+    if (!tutorial) return null
 
-    return tutorials
+    const { requires, hidden } = tutorial
+
+    return {
+        ...tutorial,
+        requires: JSON.parse(requires),
+        hiddenElements: hidden
+    }
 }
