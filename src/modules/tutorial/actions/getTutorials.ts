@@ -1,9 +1,19 @@
 import { db } from "../../../../db/knex"
 
-import { Tutorial } from "../types/Tutorial"
+import { Tutorial, TutorialRaw } from "../types/Tutorial"
 
 export const getTutorials = async () => {
-    const tutorials = await db<Tutorial>("tutorials")
+    const rawTutorials = await db<TutorialRaw>("tutorials")
+
+    const tutorials = rawTutorials.map(tut => {
+        const { requires, hidden } = tut
+
+        return {
+            ...tut,
+            requires: JSON.parse(requires),
+            hiddenElements: hidden
+        }
+    })
 
     return tutorials
 }
