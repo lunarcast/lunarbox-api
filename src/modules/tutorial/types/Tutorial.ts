@@ -5,7 +5,7 @@ type RuntimeValue = object
 export interface Tutorial {
     id: string
     name: string
-    base: string
+    base: Project["id"]
     requires: string[]
     solution: Project["id"]
     steps: object
@@ -15,7 +15,7 @@ export interface Tutorial {
 export interface TutorialRaw {
     id: string
     name: string
-    base: string
+    base: Project["id"]
     requires: string
     solution: Project["id"]
     steps: object
