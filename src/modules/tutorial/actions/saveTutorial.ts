@@ -4,7 +4,7 @@ import { Tutorial, TutorialRaw } from "../types/Tutorial"
 
 export const saveTutorial = async (
     id: Tutorial["id"],
-    tutorial: Omit<Tutorial, "id">
+    tutorial: Omit<Tutorial, "id" | "owner">
 ) => {
     const { requires, hiddenElements } = tutorial
 
