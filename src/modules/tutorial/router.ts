@@ -10,6 +10,9 @@ import { createTutorial } from "./actions/createTutorial"
 import { saveTutorial } from "./actions/saveTutorial"
 import { deleteTutorial } from "./actions/deleteTutorial"
 
+import { requireUnauthenticated } from "../auth/middleware/requireUnauthenticated"
+import { requireAdmin } from "../auth/middleware/requireAdmin"
+
 import { validateSchema } from "../schema/middleware/validateSchema"
 
 import { tutorialBody } from "./schema/tutorialBody"
@@ -39,58 +42,98 @@ router.get("/:id", async (ctx, next) => {
     await next()
 })
 
-router.post("/", validateSchema(tutorialBody, "body"), async (ctx, next) => {
-    const { name, base, requires, solution, steps, hiddenElements } = ctx
-        .request.body as Tutorial
+router.post(
+    "/",
+    requireAdmin(),
+    validateSchema(tutorialBody, "body"),
+    async (ctx, next) => {
+        const { name, base, requires, solution, steps, hiddenElements } = ctx
+            .request.body as Tutorial
 
-    const createdTutorial = await createTutorial({
-        name,
-        base,
-        requires,
-        solution,
-        steps,
-        hiddenElements
-    })
+        const session = ctx.session!
 
-    ctx.status = 201
-    ctx.body = {
-        status: 201,
-        message: "Successfully created",
-        project: { id: createdTutorial.id }
+        const createdTutorial = await createTutorial({
+            name,
+            base,
+            requires,
+            solution,
+            steps,
+            hiddenElements,
+            owner: session.owner
+        })
+
+        ctx.status = 201
+        ctx.body = {
+            status: 201,
+            message: "Successfully created",
+            project: { id: createdTutorial.id }
+        }
+
+        await next()
     }
+)
 
-    await next()
-})
+router.put(
+    "/:id",
+    requireAdmin(),
+    validateSchema(tutorialBody, "body"),
+    async (ctx, next) => {
+        const { id } = ctx.params as Pick<Tutorial, "id">
+        const { name, base, requires, solution, steps, hiddenElements } = ctx
+            .request.body as Tutorial
 
-router.put("/:id", validateSchema(tutorialBody, "body"), async (ctx, next) => {
-    const { id } = ctx.params as Pick<Tutorial, "id">
-    const { name, base, requires, solution, steps, hiddenElements } = ctx
-        .request.body as Tutorial
+        const session = ctx.session!
 
-    await saveTutorial(id, {
-        name,
-        base,
-        requires,
-        solution,
-        steps,
-        hiddenElements
-    })
+        const tutorial = await getTutorialById(id)
+        if (!tutorial) {
+            throw new HttpError(
+                404,
+                "There seems to be no tutorial with that id"
+            )
+        }
+        if (tutorial.owner !== session.user) {
+            throw new HttpError(
+                401,
+                "You don't seem to be the owner of that tutorial"
+            )
+        }
 
-    ctx.status = 200
-    ctx.body = {
-        status: 200,
-        message: "Successfully updated"
+        await saveTutorial(id, {
+            name,
+            base,
+            requires,
+            solution,
+            steps,
+            hiddenElements
+        })
+
+        ctx.status = 200
+        ctx.body = {
+            status: 200,
+            message: "Successfully updated"
+        }
+
+        await next()
     }
-
-    await next()
-})
+)
 
 router.delete("/:id", async (ctx, next) => {
-    const tutorialId = ctx.params.id as Tutorial["id"]
+    const id = ctx.params.id as Tutorial["id"]
 
-    const project = await getTutorialById(tutorialId)
+    const session = ctx.session!
 
-    await deleteTutorial(tutorialId)
+    const tutorial = await getTutorialById(id)
+    if (!tutorial) {
+        throw new HttpError(404, "There seems to be no tutorial with that id")
+    }
+    if (tutorial.owner !== session.user) {
+        throw new HttpError(
+            401,
+            "You don't seem to be the owner of that tutorial"
+        )
+    }
+
+    await deleteTutorial(id)
 
     ctx.status = 200
     ctx.body = { status: 200, message: "Successfully deleted tutorial" }
