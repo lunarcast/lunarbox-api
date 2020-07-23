@@ -1,10 +1,12 @@
 import { Project } from "../../project/types/Project"
+import { User } from "../../user/types/User"
 
 type RuntimeValue = object
 
 export interface Tutorial {
     id: string
     name: string
+    owner: User["id"]
     base: Project["id"]
     requires: string[]
     solution: Project["id"]
@@ -15,6 +17,7 @@ export interface Tutorial {
 export interface TutorialRaw {
     id: string
     name: string
+    owner: User["id"]
     base: Project["id"]
     requires: string
     solution: Project["id"]
