@@ -47,7 +47,7 @@ router.post(
     requireAdmin(),
     validateSchema(tutorialBody, "body"),
     async (ctx, next) => {
-        const { name, base, content, solution,  hiddenElements } = ctx
+        const { name, base, content, solution } = ctx
             .request.body as Tutorial
 
         const session = ctx.session!
@@ -57,7 +57,6 @@ router.post(
             base,
             content,
             solution,
-            hiddenElements,
             owner: session.user
         })
 
@@ -78,7 +77,7 @@ router.put(
     validateSchema(tutorialBody, "body"),
     async (ctx, next) => {
         const { id } = ctx.params as Pick<Tutorial, "id">
-        const { name, base, content, solution,  hiddenElements } = ctx
+        const { name, base, content, solution } = ctx
             .request.body as Tutorial
 
         const session = ctx.session!
@@ -102,7 +101,6 @@ router.put(
             base,
             solution,
             content,
-            hiddenElements
         })
 
         ctx.status = 200

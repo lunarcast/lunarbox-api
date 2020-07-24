@@ -1,22 +1,17 @@
 import { db } from "../../../../db/knex"
 
-import { Tutorial, TutorialRaw } from "../types/Tutorial"
+import { Tutorial } from "../types/Tutorial"
 
 export const saveTutorial = async (
     id: Tutorial["id"],
     tutorial: Omit<Tutorial, "id" | "owner">
 ) => {
-    const {  hiddenElements } = tutorial
 
-    const rawTutorial = {
-        ...tutorial,
-        hidden: hiddenElements
-    }
 
     const result = (
-        await db<TutorialRaw>("tutorials")
+        await db<Tutorial>("tutorials")
             .where({ id })
-            .update(rawTutorial, "*")
+            .update(tutorial, "*")
     )[0]
 
     return result

@@ -2,7 +2,7 @@ import { db } from "../../../../db/knex"
 
 import { User } from "../../user/types/User"
 import { Project } from "../types/Project"
-import { Tutorial, TutorialRaw } from "../../tutorial/types/Tutorial"
+import { Tutorial } from "../../tutorial/types/Tutorial"
 
 interface CompletedTutorial {
     id: number
@@ -23,7 +23,7 @@ export const getProjects = async (userId: User["id"]) => {
         .select(["id", "name", "metadata"])
         .where({ owner: userId })
 
-    const tutorials = await db<TutorialRaw>("tutorials").select()
+    const tutorials = await db<Tutorial>("tutorials").select(["name","id","owner"])
     const completedTutorials = await db<CompletedTutorial>(
         "completed-tutorials"
     ).select(["tutorial", "user"])
@@ -33,6 +33,7 @@ export const getProjects = async (userId: User["id"]) => {
         const completed = completedTutorials
             .filter(el => el.tutorial === id)
             .some(el => el.user === userId)
+
         const own = owner === userId
 
         return { name, id, completed, own }
