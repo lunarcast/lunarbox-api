@@ -15,6 +15,8 @@ import { requireAdmin } from "../auth/middleware/requireAdmin"
 import { validateSchema } from "../schema/middleware/validateSchema"
 
 import { tutorialBody } from "./schema/tutorialBody"
+import { requireAuthenticated } from "../auth/middleware/requireAuthenticated"
+import { completeTutorial } from "./actions/completeTutorial"
 
 const router = new Router({ prefix: "/tutorials" })
 
@@ -41,13 +43,23 @@ router.get("/:id", async (ctx, next) => {
     await next()
 })
 
+router.get("/complete/:id", requireAuthenticated(), async (ctx, next) => {
+    const { id: tutorialId } = ctx.params as Pick<Tutorial, "id">
+
+    const userId = ctx.session!.user
+
+    await completeTutorial(tutorialId, userId)
+
+    ctx.status = 200
+    ctx.body = { status: 200, message: "Successfully completed tutorial" }
+})
+
 router.post(
     "/",
     requireAdmin(),
     validateSchema(tutorialBody, "body"),
     async (ctx, next) => {
-        const { name, base, content, solution } = ctx
-            .request.body as Tutorial
+        const { name, base, content, solution } = ctx.request.body as Tutorial
 
         const session = ctx.session!
 
@@ -58,7 +70,6 @@ router.post(
             solution,
             owner: session.user
         })
-
 
         ctx.status = 201
         ctx.body = {
@@ -77,8 +88,7 @@ router.put(
     validateSchema(tutorialBody, "body"),
     async (ctx, next) => {
         const { id } = ctx.params as Pick<Tutorial, "id">
-        const { name, base, content, solution } = ctx
-            .request.body as Tutorial
+        const { name, base, content, solution } = ctx.request.body as Tutorial
 
         const session = ctx.session!
 
@@ -100,7 +110,7 @@ router.put(
             name,
             base,
             solution,
-            content,
+            content
         })
 
         ctx.status = 200
