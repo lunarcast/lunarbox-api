@@ -7,12 +7,10 @@ export const createTutorial = async (tutorial: Omit<Tutorial, "id">) => {
 
     const rawTutorial = {
         ...tutorial,
-        hiddenElements:undefined,
         hidden: hiddenElements
     }
 
-    console.log(rawTutorial);
-    
+    delete rawTutorial.hiddenElements
 
     const result = (
         await db<TutorialRaw>("tutorials").insert(rawTutorial, "*")

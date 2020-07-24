@@ -8,7 +8,7 @@ export interface Tutorial {
     base: Project["id"]
     solution: Project["id"]
     content:string
-    hiddenElements: object
+    hiddenElements: object[]
 }
 
 export interface TutorialRaw {
@@ -17,6 +17,6 @@ export interface TutorialRaw {
     owner: User["id"]
     base: Project["id"]
     solution: Project["id"]
-    hidden: object
+    hidden: object[]
     content:string
 }

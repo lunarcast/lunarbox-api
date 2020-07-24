@@ -58,14 +58,14 @@ router.post(
             content,
             solution,
             hiddenElements,
-            owner: session.owner
+            owner: session.user
         })
 
         ctx.status = 201
         ctx.body = {
             status: 201,
             message: "Successfully created",
-            project: { id: createdTutorial.id }
+            tutorial: { id: createdTutorial.id }
         }
 
         await next()
