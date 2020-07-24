@@ -10,7 +10,6 @@ import { createTutorial } from "./actions/createTutorial"
 import { saveTutorial } from "./actions/saveTutorial"
 import { deleteTutorial } from "./actions/deleteTutorial"
 
-import { requireUnauthenticated } from "../auth/middleware/requireUnauthenticated"
 import { requireAdmin } from "../auth/middleware/requireAdmin"
 
 import { validateSchema } from "../schema/middleware/validateSchema"
@@ -59,6 +58,7 @@ router.post(
             solution,
             owner: session.user
         })
+
 
         ctx.status = 201
         ctx.body = {

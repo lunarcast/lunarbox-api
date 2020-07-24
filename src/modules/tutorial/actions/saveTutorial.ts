@@ -6,8 +6,6 @@ export const saveTutorial = async (
     id: Tutorial["id"],
     tutorial: Omit<Tutorial, "id" | "owner">
 ) => {
-
-
     const result = (
         await db<Tutorial>("tutorials")
             .where({ id })
