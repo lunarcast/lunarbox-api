@@ -2,8 +2,15 @@ import { db } from "../../../../db/knex"
 
 import { User } from "../../user/types/User"
 import { Project } from "../types/Project"
+import { Tutorial, TutorialRaw } from "../../tutorial/types/Tutorial"
 
-export const getProjects = async (id: User["id"]) => {
+interface CompletedTutorial {
+    id: number
+    tutorial: Tutorial["id"]
+    user: User["id"]
+}
+
+export const getProjects = async (userId: User["id"]) => {
     const exampleProjects = await db<Project>("projects")
         .select(["id", "name", "metadata"])
         .where({ example: true })
@@ -14,7 +21,22 @@ export const getProjects = async (id: User["id"]) => {
 
     const userProjects = await db<Project>("projects")
         .select(["id", "name", "metadata"])
-        .where({ owner: id })
+        .where({ owner: userId })
 
-    return { exampleProjects, visibleProjects, userProjects }
+    const tutorials = await db<TutorialRaw>("tutorials").select()
+    const completedTutorials = await db<CompletedTutorial>(
+        "completed-tutorials"
+    ).select(["tutorial", "user"])
+
+    const tutorialProjects = tutorials.map(tut => {
+        const { name, id, owner } = tut
+        const completed = completedTutorials
+            .filter(el => el.tutorial === id)
+            .some(el => el.user === userId)
+        const own = owner === userId
+
+        return { name, id, completed, own }
+    })
+
+    return { exampleProjects, visibleProjects, userProjects, tutorialProjects }
 }
