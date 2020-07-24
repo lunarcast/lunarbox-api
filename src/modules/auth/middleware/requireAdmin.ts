@@ -15,9 +15,10 @@ export const requireAdmin = (): Middleware<DefaultState, Context> => async (
 
     const user = await findUser("id", userId)
 
-    if (user?.admin) {
+    if (!user?.admin) {
         throw new HttpError(401, "You don't seem to be an admin")
     }
+    
     ctx.session = session
 
     await next()

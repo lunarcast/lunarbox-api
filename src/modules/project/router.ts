@@ -15,7 +15,6 @@ import { validateSchema } from "../schema/middleware/validateSchema"
 import { projectBody } from "./schema/projectBody"
 
 import { requireAuthenticated } from "../auth/middleware/requireAuthenticated"
-import { requireAdmin } from "../auth/middleware/requireAdmin"
 import { findUser } from "../user/actions/findUser"
 
 const router = new Router({ prefix: "/projects" })
