@@ -1,16 +1,13 @@
 import { Project } from "../../project/types/Project"
 import { User } from "../../user/types/User"
 
-type RuntimeValue = object
-
 export interface Tutorial {
     id: string
     name: string
     owner: User["id"]
     base: Project["id"]
-    requires: string[]
     solution: Project["id"]
-    steps: object
+    content:string
     hiddenElements: object
 }
 
@@ -19,10 +16,7 @@ export interface TutorialRaw {
     name: string
     owner: User["id"]
     base: Project["id"]
-    requires: string
     solution: Project["id"]
-    steps: object
     hidden: object
+    content:string
 }
-
-type TutorialWithMetadata = Tutorial & { completed: boolean }

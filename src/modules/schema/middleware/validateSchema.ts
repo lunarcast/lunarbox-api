@@ -18,6 +18,8 @@ export const validateSchema = (
 
     const result = schema.validate(toValidate[field])
 
+    
+
     if (result.error) throw new HttpError(400, "Invalid Syntax")
 
     return next()

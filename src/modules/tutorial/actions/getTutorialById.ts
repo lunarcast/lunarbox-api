@@ -9,11 +9,10 @@ export const getTutorialById = async (id: Tutorial["id"]) => {
         .where({ id })
     if (!tutorial) return null
 
-    const { requires, hidden } = tutorial
+    const {  hidden } = tutorial
 
     return {
         ...tutorial,
-        requires: JSON.parse(requires),
         hiddenElements: hidden
     }
 }

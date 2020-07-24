@@ -6,11 +6,10 @@ export const saveTutorial = async (
     id: Tutorial["id"],
     tutorial: Omit<Tutorial, "id" | "owner">
 ) => {
-    const { requires, hiddenElements } = tutorial
+    const {  hiddenElements } = tutorial
 
     const rawTutorial = {
         ...tutorial,
-        requires: JSON.stringify(requires),
         hidden: hiddenElements
     }
 
