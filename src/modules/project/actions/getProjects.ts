@@ -23,7 +23,11 @@ export const getProjects = async (userId: User["id"]) => {
         .select(["id", "name", "metadata"])
         .where({ owner: userId })
 
-    const tutorials = await db<Tutorial>("tutorials").select(["name","id","owner"])
+    const tutorials = await db<Tutorial>("tutorials").select([
+        "name",
+        "id",
+        "owner"
+    ])
     const completedTutorials = await db<CompletedTutorial>(
         "completed-tutorials"
     ).select(["tutorial", "user"])
@@ -39,5 +43,10 @@ export const getProjects = async (userId: User["id"]) => {
         return { name, id, completed, own }
     })
 
-    return { exampleProjects, visibleProjects, userProjects, tutorialProjects }
+    return {
+        exampleProjects,
+        visibleProjects,
+        userProjects,
+        tutorials: tutorialProjects
+    }
 }
