@@ -17,7 +17,8 @@ export const config: Readonly<Partial<session.opts>> = {
     httpOnly: true,
     renew: true,
     signed: true,
-    sameSite: "none"
+    secure: true
+    sameSite: "none",
 }
 
 export const useSession = (app: Koa) => session(config, app)
