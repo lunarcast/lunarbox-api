@@ -16,7 +16,7 @@ export const config: Readonly<Partial<session.opts>> = {
     maxAge: 86400000,
     httpOnly: true,
     renew: true,
-    signed: false
+    signed: true
 }
 
 export const useSession = (app: Koa) => session(config, app)
