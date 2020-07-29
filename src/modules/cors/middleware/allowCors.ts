@@ -10,6 +10,7 @@ export const allowCors = (): Middleware => async (ctx, next) => {
         "Content-Type, Authorization, Content-Length, X-Requested,With"
     )
     ctx.set("Access-Control-Allow-Credentials", "true")
+    ctx.set("SameSite", "None")
 
     if (ctx.method === "OPTIONS") {
         ctx.status = 200
