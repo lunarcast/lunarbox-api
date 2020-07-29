@@ -21,7 +21,6 @@ const router = new Router()
 const port = Number(process.env.PORT ?? 8090)
 
 app.use(useSession(app)).use(allowCors())
-app.keys = [process.env.SECRET!]
 
 app.use(bodyParser()).use(json({ pretty: false, param: "pretty", spaces: 4 }))
 
