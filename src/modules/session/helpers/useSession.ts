@@ -16,6 +16,7 @@ export const config: Readonly<Partial<session.opts>> = {
     maxAge: 86400000,
     httpOnly: true,
     renew: true,
+    sameSite: "none",
     signed: false
 }
 
