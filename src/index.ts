@@ -15,6 +15,7 @@ import apiRoutes from "./modules/apiRouter"
 import previewRoute from "./modules/preview/router"
 
 const app = new Koa()
+app.keys = [process.env.KEYS!]
 
 const router = new Router()
 

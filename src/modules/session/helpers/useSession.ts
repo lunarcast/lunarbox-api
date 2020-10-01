@@ -17,6 +17,7 @@ export const config: Readonly<Partial<session.opts>> = {
     httpOnly: true,
     renew: true,
     sameSite: "none",
+    secure: true,
     signed: false
 }
 
