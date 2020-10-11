@@ -6,7 +6,7 @@ import pg from "pg"
 config()
 
 if (process.env.NODE_ENV === "production") {
-    pg.defaults.ssl = true
+    pg.defaults.ssl = { rejectUnauthorized: true }
 }
 
 const options = {
