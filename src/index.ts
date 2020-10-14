@@ -16,6 +16,7 @@ import previewRoute from "./modules/preview/router"
 
 const app = new Koa()
 app.keys = [process.env.KEYS!]
+app.proxy = true
 
 const router = new Router()
 
