@@ -6,7 +6,7 @@ import pg from "pg"
 config()
 
 if (process.env.NODE_ENV === "production") {
-    pg.defaults.ssl = true
+    pg.defaults.ssl = { rejectUnauthorized: false }
 }
 
 const options = {
@@ -35,7 +35,7 @@ const configs: Record<string, Config<{}>> = {
 
     production: {
         ...options,
-        connection: `${process.env.DATABASE_URL}?ssl=true`
+        connection: `${process.env.DATABASE_URL}`
     }
 }
 

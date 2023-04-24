@@ -45,8 +45,8 @@ router.post(
             password: hashedPassword
         })
 
-        if (!user) {
-            throw new HttpError(400, "That Username seems to be already taken")
+        if (user == "username" || user == "email") {
+            throw new HttpError(400, `That ${user} seems to be already taken`)
         }
 
         ctx.session!.user = user.id

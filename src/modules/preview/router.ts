@@ -24,7 +24,7 @@ router.get("/:id", async (ctx, next) => {
     const author = (await findUser("id", project.owner))!
 
     if (!isbot(ctx.get("User-Agent"))) {
-        ctx.redirect(`${process.env.CORS_ORIGIN!}/clone/${project.id}`)
+        ctx.redirect(`${process.env.CORS_ORIGIN!}/go/project/${project.id}`)
         return await next()
     }
 
